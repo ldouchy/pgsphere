@@ -15,9 +15,9 @@ Create the pg_sphere extension with:
 
 # Acknowledgments
 
-The docker image is provided by [ldouchy](https://hub.docker.com/repository/docker/douchy/pgsphere).
+The docker image is provided by [ldouchy](https://hub.docker.com/r/douchy/pgsphere).
 
 This fork uses the fix for PostgreSQL 12 by [mdgomes](https://github.com/mdgomes/pgsphere).
 
-For more information, have a look at [http://pgsphere.projects.postgresql.org](http://pgsphere.projects.postgresql.org) and [https://github.com/akorotkov/pgsphere](https://github.com/akorotkov/pgsphere)
+For more information, have a look at [https://pgsphere.github.io/](https://pgsphere.github.io/) and [https://github.com/akorotkov/pgsphere](https://github.com/akorotkov/pgsphere)
 
