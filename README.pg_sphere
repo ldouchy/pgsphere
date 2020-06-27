@@ -1,31 +1,23 @@
-This is an R-Tree implementation using GiST for spherical objects
-like spherical points and spherical circles with 
-useful functions and operators.
+# Docker PostgreSQL 12 with pg_sphere
+
+The following command will start a postgres 12 deamon with the pg_sphere module installed:
+
+`docker run --rm   --name pg-docker -e POSTGRES_PASSWORD=<pass> -d -p 5432:5432 -v <path to store data locally>:/var/lib/postgresql/data  douchy/pgsphere`
+
+The database can be accessed via:
+
+`docker exec -it pg-docker psql -U postgres -d postgress`
+
+Create the pg_sphere extension with:
+
+`docker exec -it pg-docker psql -c "CREATE EXTENSION pg_sphere;" postgres -U postgres`
 
 
-NOTICE:
-     This version will work only with postgresql version 9.1 and above.
+# Acknowledgments
 
-INSTALLATION:
+The docker image is provided by [ldouchy](https://hub.docker.com/repository/docker/douchy/pgsphere).
 
-  -- build and install
-  gmake USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config
-  gmake USE_PGXS=1 PG_CONFIG=/usr/bin/pg_config install
-  -- load extension
-  psql -c "CREATE EXTENSION pg_sphere;" <database>
+This fork uses the fix for PostgreSQL 12 by [mdgomes](https://github.com/mdgomes/pgsphere).
 
-REGRESSION TEST (as the same user as the currently running postgresql server):
-
-  make USE_PGXS=1 installcheck
-
-LONG REGRESSION TEST:
-
-  make USE_PGXS=1 crushtest
-
-The 'make' program must be compatible with GNU make.
-
-For more information, have a look at http://pgsphere.projects.postgresql.org
-and https://github.com/akorotkov/pgsphere
-
-Have a lot of fun!
+For more information, have a look at [http://pgsphere.projects.postgresql.org](http://pgsphere.projects.postgresql.org) and [https://github.com/akorotkov/pgsphere](https://github.com/akorotkov/pgsphere)
 
