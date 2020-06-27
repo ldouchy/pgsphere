@@ -6,7 +6,7 @@ The following command will start a postgres 12 deamon with the pg_sphere module 
 
 The database can be accessed via:
 
-`docker exec -it pg-docker psql -U postgres -d postgress`
+`docker exec -it pg-docker psql -U postgres -d postgres`
 
 Create the pg_sphere extension with:
 
