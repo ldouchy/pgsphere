@@ -7,6 +7,7 @@ RUN apt-get update \
 	git \
 	gcc \
 	bison \
+	flex \
 	postgresql-server-dev-13 \
 && cd /root \
 && git clone --depth 1 https://github.com/mdgomes/pgsphere.git \
@@ -17,7 +18,12 @@ RUN apt-get update \
 
 FROM postgres:13
 
-COPY --from=build /usr/lib/postgresql/13/lib/bitcode/pg_sphere /usr/lib/postgresql/13/lib/bitcode/pg_sphere
+ENV POSTGRES_VERSION 13
+
+COPY --from=build /usr/lib/postgresql/${POSTGRES_VERSION}/lib/bitcode/pg_sphere /usr/lib/postgresql/${POSTGRES_VERSION}/lib/bitcode/pg_sphere
+COPY --from=build /usr/share/postgresql/${POSTGRES_VERSION}/extension/pg_sphere.control /usr/share/postgresql/${POSTGRES_VERSION}/extension/pg_sphere.control
+COPY --from=build /usr/lib/postgresql/${POSTGRES_VERSION}/lib/pg_sphere.so /usr/lib/postgresql/${POSTGRES_VERSION}/lib/pg_sphere.so
+COPY --from=build /usr/share/postgresql/${POSTGRES_VERSION}/extension/ /usr/share/postgresql/${POSTGRES_VERSION}/extension/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 

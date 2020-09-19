@@ -16,10 +16,12 @@ RUN apt-get update \
 
 FROM postgres:12
 
-COPY --from=build /usr/lib/postgresql/12/lib/bitcode/pg_sphere /usr/lib/postgresql/12/lib/bitcode/pg_sphere
-COPY --from=build /usr/share/postgresql/12/extension/pg_sphere.control /usr/share/postgresql/12/extension/pg_sphere.control
-COPY --from=build /usr/lib/postgresql/12/lib/pg_sphere.so /usr/lib/postgresql/12/lib/pg_sphere.so
-COPY --from=build /usr/share/postgresql/12/extension/ /usr/share/postgresql/12/extension/
+ENV POSTGRES_VERSION 12
+
+COPY --from=build /usr/lib/postgresql/${POSTGRES_VERSION}/lib/bitcode/pg_sphere /usr/lib/postgresql/${POSTGRES_VERSION}/lib/bitcode/pg_sphere
+COPY --from=build /usr/share/postgresql/${POSTGRES_VERSION}/extension/pg_sphere.control /usr/share/postgresql/${POSTGRES_VERSION}/extension/pg_sphere.control
+COPY --from=build /usr/lib/postgresql/${POSTGRES_VERSION}/lib/pg_sphere.so /usr/lib/postgresql/${POSTGRES_VERSION}/lib/pg_sphere.so
+COPY --from=build /usr/share/postgresql/${POSTGRES_VERSION}/extension/ /usr/share/postgresql/${POSTGRES_VERSION}/extension/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 

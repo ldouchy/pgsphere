@@ -2,15 +2,41 @@
 
 The following command will start a postgres 12 deamon with the pg_sphere module installed:
 
-`docker run --rm   --name pg-docker -e POSTGRES_PASSWORD=<pass> -d -p 5432:5432 -v <path to store data locally>:/var/lib/postgresql/data  douchy/pgsphere:12.0.0`
+```bash
+docker run --rm \
+           --name pg-docker \
+           -e POSTGRES_PASSWORD=<pass> \
+           -d \
+           -p 5432:5432 \
+           -v <path to store data locally>:/var/lib/ \
+           postgresql/data  
+             douchy/pgsphere:{{TAG}}
+```
 
 The database can be accessed via:
 
-`docker exec -it pg-docker psql -U postgres -d postgres`
+```bash
+docker exec -it pg-docker psql -U postgres -d postgres
+```
 
 Create the pg_sphere extension with:
 
-`docker exec -it pg-docker psql -c "CREATE EXTENSION pg_sphere;" postgres -U postgres`
+```bash
+docker exec -it pg-docker psql -c "CREATE EXTENSION pg_sphere;" -U postgres postgres
+```
+
+Test pg_sphere extension with:
+```bash
+psql -c "select spoint '(0.1,-0.2)';" -U postgres postgres
+```
+
+Expected output:
+```sql
+    spoint
+--------------
+ (0.1 , -0.2)
+(1 row)
+```
 
 # Container
 
@@ -18,12 +44,8 @@ Visit [https://hub.docker.com/r/douchy/pgsphere](https://hub.docker.com/r/douchy
 
 Container available for posgres 12.x and 13.x on Debian and Alpine:
 - Debian
- - postgres 12.x `docker pull douchy/pgsphere:12.0.0`
- - postgres 13.x `docker pull douchy/pgsphere:13.0.0`
-
-- Alpine
- - postgres 12.x `docker pull douchy/pgsphere:12.0.0-alpine`
- - postgres 13.x `docker pull douchy/pgsphere:13.0.0-alpine`
+ - postgres 12.x `docker pull douchy/pgsphere:12.0.1`
+ - postgres 13.x `docker pull douchy/pgsphere:13.0.1`
 
 # Acknowledgments
 
